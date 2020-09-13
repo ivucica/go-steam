@@ -119,7 +119,8 @@ func (a *Auth) handleLogOnResponse(packet *Packet) {
 			ExtendedResult:            EResult(body.GetEresultExtended()),
 			OutOfGameSecsPerHeartbeat: body.GetOutOfGameHeartbeatSeconds(),
 			InGameSecsPerHeartbeat:    body.GetInGameHeartbeatSeconds(),
-			PublicIp:                  body.GetPublicIp(),
+			// 'cannot use body.GetPublicIp() (type *protobuf.CMsgIPAddress) as type uint32 in field value'
+			//PublicIp:                  body.GetPublicIp(),
 			ServerTime:                body.GetRtime32ServerTime(),
 			AccountFlags:              EAccountFlags(body.GetAccountFlags()),
 			ClientSteamId:             SteamId(body.GetClientSuppliedSteamid()),
