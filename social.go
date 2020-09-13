@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"io"
 	"sync"
+	"log"
 	"time"
 
 	. "github.com/Philipp15b/go-steam/protocol"
@@ -327,6 +328,7 @@ func (s *Social) handlePersonaState(packet *Packet) {
 				s.Friends.SetPersonaStateFlags(id, EPersonaStateFlag(friend.GetPersonaStateFlags()))
 			}
 			if (flags & EClientPersonaStateFlag_GameDataBlob) == EClientPersonaStateFlag_GameDataBlob {
+				log.Printf("got game data: game app id %d, game id %d, game name %s", friend.GetGamePlayedAppId(), friend.GetGameid(), friend.GetGameName())
 				s.Friends.SetGameAppId(id, friend.GetGamePlayedAppId())
 				s.Friends.SetGameId(id, friend.GetGameid())
 				s.Friends.SetGameName(id, friend.GetGameName())
