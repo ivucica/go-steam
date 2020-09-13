@@ -92,6 +92,8 @@ func buildProtoMap(srcSubdir string, files map[string]string, outDir string) {
 var clientProtoFiles = map[string]string{
 	"steammessages_base.proto":   "base.pb.go",
 	"encrypted_app_ticket.proto": "app_ticket.pb.go",
+	"webui/friends.proto":        "webui_friends.pb.go",
+	"webui/friends_mobile.proto": "webui_friends_mobile.pb.go",
 
 	"steammessages_clientserver.proto":         "client_server.pb.go",
 	"steammessages_clientserver_2.proto":       "client_server_2.pb.go",
