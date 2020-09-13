@@ -50,6 +50,7 @@ type PersonaStateEvent struct {
 	OnlineSessionInstances uint32
 	PublishedSessionId     uint32
 	PersonaSetByUser       bool
+	RichPresence           map[string]string
 }
 
 // Fired when a clan's state has been changed

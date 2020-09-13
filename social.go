@@ -344,6 +344,14 @@ func (s *Social) handlePersonaState(packet *Packet) {
 				}
 			}
 		}
+
+		rp := map[string]string{}
+		for _, kv := range friend.GetRichPresence() {
+			if kv.Key != nil && kv.Value != nil {
+				rp[*kv.Key] = *kv.Value
+			}
+		}
+
 		s.client.Emit(&PersonaStateEvent{
 			StatusFlags:            flags,
 			FriendId:               id,
@@ -366,6 +374,7 @@ func (s *Social) handlePersonaState(packet *Packet) {
 			OnlineSessionInstances: friend.GetOnlineSessionInstances(),
 			PublishedSessionId:     friend.GetPublishedInstanceId(),
 			PersonaSetByUser:       friend.GetPersonaSetByUser(),
+			RichPresence:           rp,
 		})
 	}
 }
