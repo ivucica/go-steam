@@ -18,7 +18,7 @@ import (
 	"strings"
 )
 
-var printCommands = false
+var printCommands = true
 
 func main() {
 	args := strings.Join(os.Args[1:], " ")
@@ -136,9 +136,11 @@ func compileProto(srcBase, srcSubdir, proto, target string) {
 	}
 	execute("protoc", "--go_out="+outDir, "-I="+srcBase+"/"+srcSubdir, "-I="+srcBase, filepath.Join(srcBase, srcSubdir, proto))
 	out := strings.Replace(filepath.Join(outDir, proto), ".proto", ".pb.go", 1)
-	err = forceRename(out, target)
-	if err != nil {
-		panic(err)
+	if !printCommands {
+		err = forceRename(out, target)
+		if err != nil {
+			panic(err)
+		}
 	}
 }
 
@@ -260,13 +262,14 @@ func (w *quotedWriter) Write(p []byte) (n int, err error) {
 func execute(command string, args ...string) {
 	if printCommands {
 		print(command + " " + strings.Join(args, " "))
-	}
-	cmd := exec.Command(command, args...)
-	cmd.Stdout = newQuotedWriter(os.Stdout)
-	cmd.Stderr = newQuotedWriter(os.Stderr)
-	err := cmd.Run()
-	if err != nil {
-		printerr(err.Error())
-		os.Exit(1)
+	} else {
+		cmd := exec.Command(command, args...)
+		cmd.Stdout = newQuotedWriter(os.Stdout)
+		cmd.Stderr = newQuotedWriter(os.Stderr)
+		err := cmd.Run()
+		if err != nil {
+			printerr(err.Error())
+			os.Exit(1)
+		}
 	}
 }
