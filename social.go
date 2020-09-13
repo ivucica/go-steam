@@ -374,7 +374,8 @@ func (s *Social) handlePersonaState(packet *Packet) {
 			ClanRank:               friend.GetClanRank(),
 			ClanTag:                friend.GetClanTag(),
 			OnlineSessionInstances: friend.GetOnlineSessionInstances(),
-			PublishedSessionId:     friend.GetPublishedInstanceId(),
+			// friend.GetPublishedInstanceId undefined (type *protobuf.CMsgClientPersonaState_Friend has no field or method GetPublishedInstanceId)
+			//PublishedSessionId:     friend.GetPublishedInstanceId(),
 			PersonaSetByUser:       friend.GetPersonaSetByUser(),
 			RichPresence:           rp,
 		})
