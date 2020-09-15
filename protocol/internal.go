@@ -39,7 +39,7 @@ type MessageBody interface {
 // the default details to request in most situations
 const EClientPersonaStateFlag_DefaultInfoRequest = EClientPersonaStateFlag_PlayerName |
 	EClientPersonaStateFlag_Presence | EClientPersonaStateFlag_SourceID |
-	EClientPersonaStateFlag_GameExtraInfo
+	EClientPersonaStateFlag_GameExtraInfo | EClientPersonaStateFlag_LastSeen
 
 const DefaultAvatar = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb"
 
